@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunny | Tienda Virtual</title>
+    <!-- Tailwind CSS para diseño responsivo y moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuente Inter para tipografía limpia y minimalista -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Configuración personalizada de colores cálidos -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        sunny: {
+                            50: '#FFFDF5',
+                            100: '#FEF7D7',
+                            200: '#FDE89B',
+                            300: '#FBD359',
+                            400: '#F8B823',
+                            500: '#F59E0B',
+                            600: '#EA580C', // Naranja cálido
+                            700: '#DC2626', // Rojo vibrante
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-amber-50/40 text-stone-800 font-sans antialiased selection:bg-amber-300 selection:text-stone-900">
+
+    <!-- Barra de navegación fija superior -->
+    <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-amber-200/60 transition-all">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <!-- Logotipo Sunny -->
+            <a href="#inicio" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-red-500 via-orange-500 to-amber-400 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"></path>
+                    </svg>
+                </div>
+                <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-red-600 via-orange-600 to-amber-500 bg-clip-text text-transparent">
+                    Sunny
+                </span>
+            </a>
+
+            <!-- Enlaces rápidos -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
+                <a href="#inicio" class="hover:text-orange-600 transition-colors">Inicio</a>
+                <a href="#catalogo" class="hover:text-orange-600 transition-colors">Catálogo</a>
+            </nav>
+
+            <!-- Botón del Carrito de Compras -->
+            <button onclick="toggleCart(true)" class="relative flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 hover:bg-amber-200/80 text-amber-900 font-semibold text-sm transition-all active:scale-95">
+                <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                </svg>
+                <span class="hidden sm:inline">Carrito</span>
+                <span id="cart-badge" class="inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+                    0
+                </span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sección de Bienvenida (Hero) -->
+    <section id="inicio" class="relative overflow-hidden py-16 sm:py-24 px-4 sm:px-6 border-b border-amber-200/50 bg-gradient-to-b from-amber-100/70 via-orange-50/40 to-transparent">
+        <!-- Elementos decorativos sutiles en el fondo -->
+        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-amber-300/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute top-20 -left-20 w-72 h-72 rounded-full bg-red-400/15 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+            <span class="inline-block py-1 px-3.5 rounded-full bg-orange-100 text-orange-700 text-xs font-semibold tracking-wider uppercase mb-5 border border-orange-200/70">
+                Bienvenido a nuestra tienda virtual
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-stone-900 mb-6">
+                Descubre <span class="bg-gradient-to-r from-red-600 via-orange-500 to-amber-500 bg-clip-text text-transparent">Sunny</span>
+            </h1>
+            <p class="text-lg sm:text-2xl text-stone-600 font-normal leading-relaxed mb-8">
+                “Aquí vendemos productos de calidad”
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#catalogo" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white font-semibold shadow-md shadow-orange-500/20 transition-all active:scale-95">
+                    Explorar Catálogo
+                </a>
+                <button onclick="toggleCart(true)" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-amber-50 text-stone-800 border border-amber-300 font-semibold transition-all active:scale-95">
+                    Ver mi Carrito
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección del Catálogo de Productos -->
+    <main id="catalogo" class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-stone-900">Nuestro Catálogo</h2>
+                <p class="text-stone-500 text-sm sm:text-base mt-1">Selecciona tus artículos favoritos y agrégalos al carrito.</p>
+            </div>
+            <div class="text-xs font-medium text-amber-800 bg-amber-100/80 px-3.5 py-2 rounded-xl border border-amber-200/80 self-start sm:self-auto">
+                Stock actualizado en tiempo real
+            </div>
+        </div>
+
+        <!-- Cuadrícula de Productos (Renderizada dinámicamente con JS) -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Las tarjetas de producto se insertan aquí -->
+        </div>
+    </main>
+
+    <!-- Pie de página minimalista -->
+    <footer class="bg-white border-t border-amber-200/60 py-10 px-4 sm:px-6 mt-12">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-stone-500">
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-gradient-to-tr from-red-500 to-amber-400"></span>
+                <span class="font-bold text-stone-800">Sunny</span>
+                <span>— Tienda Virtual</span>
+            </div>
+            <p>Aquí vendemos productos de calidad. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Panel Lateral del Carrito de Compras (Drawer) -->
+    <div id="cart-overlay" onclick="toggleCart(false)" class="fixed inset-0 bg-stone-900/40 backdrop-blur-xs z-50 hidden opacity-0 transition-opacity duration-300"></div>
+    
+    <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <!-- Cabecera del carrito -->
+        <div class="px-6 py-5 border-b border-amber-100 flex items-center justify-between bg-amber-50/50">
+            <div class="flex items-center gap-2.5">
+                <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <h3 class="text-lg font-bold text-stone-900">Tu Carrito</h3>
+            </div>
+            <button onclick="toggleCart(false)" class="p-2 rounded-full hover:bg-amber-100 text-stone-500 hover:text-stone-800 transition-colors" aria-label="Cerrar carrito">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Lista de productos en el carrito -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Los ítems del carrito se renderizan aquí -->
+        </div>
+
+        <!-- Pie del carrito con total y botón de compra -->
+        <div id="cart-footer" class="p-6 border-t border-amber-100 bg-amber-50/40 hidden">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-stone-600 font-medium">Total a pagar</span>
+                <span id="cart-total" class="text-2xl font-extrabold text-red-600">$0.00</span>
+            </div>
+            <div class="space-y-2.5">
+                <button onclick="checkout()" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-red-600 via-orange-500 to-amber-500 hover:from-red-700 hover:to-amber-600 text-white font-bold shadow-md shadow-orange-500/20 transition-all active:scale-98">
+                    Confirmar Pedido
+                </button>
+                <button onclick="clearCart()" class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-stone-500 hover:text-red-600 hover:bg-red-50 transition-colors">
+                    Vaciar carrito y devolver stock
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Notificación flotante (Toast) en lugar de alert() -->
+    <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div id="toast-content" class="px-5 py-3 rounded-full bg-stone-900 text-white text-sm font-medium shadow-lg flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+            <span id="toast-message">Mensaje</span>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación de Compra -->
+    <div id="order-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-stone-900/50 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-7 text-center shadow-2xl border border-amber-200">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 flex items-center justify-center text-white shadow-md">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h4 class="text-xl font-extrabold text-stone-900 mb-2">¡Pedido Confirmado!</h4>
+            <p id="order-summary-text" class="text-sm text-stone-600 mb-4 leading-relaxed">
+                Gracias por comprar en Sunny. Tu orden ha sido procesada con éxito.
+            </p>
+            <p class="text-xs text-amber-800 bg-amber-100/80 p-3 rounded-xl mb-6 border border-amber-200">
+                El resumen de tu pedido se ha copiado automáticamente. Pégalo en nuestro DM de Instagram para finalizar.
+            </p>
+            <div class="space-y-2.5">
+                <a href="https://www.instagram.com/cdrzenith?vrfl=MWYzN25jdDlyMmMyOQ==" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-2xl bg-gradient-to-r from-red-600 via-orange-500 to-amber-500 hover:from-red-700 hover:to-amber-600 text-white font-bold transition-all flex items-center justify-center gap-2 shadow-md">
+                    <span>Ir al DM de Instagram</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                </a>
+                <button onclick="closeOrderModal()" class="w-full py-2.5 rounded-xl text-sm font-semibold text-stone-500 hover:bg-amber-50 transition-colors">
+                    Seguir comprando
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lógica de la Tienda Virtual Sunny -->
+    <script>
+        /**
+         * Datos iniciales de los productos de Sunny
+         * Cada producto inicia con stock de 10 unidades según lo solicitado.
+         */
+        const products = [
+            {
+                id: 1,
+                name: 'Mangas',
+                price: 7,
+                stock: 10,
+                category: 'Lectura',
+                description: 'Ediciones impresas de colección con excelente calidad de papel y tinta.',
+                badgeColor: 'bg-amber-100 text-amber-800',
+                gradient: 'from-amber-200 to-yellow-100',
+                icon: `<svg class="w-14 h-14 text-amber-600" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                       </svg>`
+            },
+            {
+                id: 2,
+                name: 'Figuras',
+                price: 5,
+                stock: 10,
+                category: 'Coleccionables',
+                description: 'Figuras detalladas ideales para decorar tu escritorio o estantería.',
+                badgeColor: 'bg-orange-100 text-orange-800',
+                gradient: 'from-orange-200 to-amber-100',
+                icon: `<svg class="w-14 h-14 text-orange-600" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                       </svg>`
+            },
+            {
+                id: 3,
+                name: 'Artículos de limpieza',
+                price: 2,
+                stock: 10,
+                category: 'Hogar y Cuidado',
+                description: 'Productos prácticos y efectivos para mantener tus espacios impecables.',
+                badgeColor: 'bg-yellow-100 text-yellow-800',
+                gradient: 'from-yellow-200 to-orange-100',
+                icon: `<svg class="w-14 h-14 text-yellow-600" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                       </svg>`
+            },
+            {
+                id: 4,
+                name: 'Máscaras',
+                price: 10,
+                stock: 10,
+                category: 'Accesorios',
+                description: 'Diseños llamativos y resistentes con acabados de primera calidad.',
+                badgeColor: 'bg-red-100 text-red-800',
+                gradient: 'from-red-200 to-orange-100',
+                icon: `<svg class="w-14 h-14 text-red-600" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                       </svg>`
+            }
+        ];
+
+        // Estado del carrito de compras: arreglo de objetos { productId, quantity }
+        let cart = [];
+        let toastTimeout = null;
+
+        /**
+         * Renderiza las tarjetas de productos en el catálogo principal
+         */
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            products.forEach(product => {
+                const isOutOfStock = product.stock <= 0;
+
+                const card = document.createElement('article');
+                card.className = 'bg-white rounded-3xl border border-amber-200/70 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group';
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Cabecera visual minimalista -->
+                        <div class="h-44 bg-gradient-to-br ${product.gradient} flex items-center justify-center relative overflow-hidden">
+                            <div class="transform group-hover:scale-110 transition-transform duration-300">
+                                ${product.icon}
+                            </div>
+                            <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full text-xs font-semibold ${product.badgeColor}">
+                                ${product.category}
+                            </span>
+                            <span class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full text-xs font-bold ${isOutOfStock ? 'bg-red-600 text-white' : 'bg-white/90 text-stone-700'} shadow-2xs">
+                                ${isOutOfStock ? 'Agotado' : `Stock: ${product.stock}`}
+                            </span>
+                        </div>
+
+                        <!-- Información del producto -->
+                        <div class="p-5">
+                            <div class="flex items-start justify-between gap-2 mb-2">
+                                <h3 class="text-lg font-bold text-stone-900 leading-snug">${product.name}</h3>
+                                <span class="text-xl font-extrabold text-red-600">$${product.price}</span>
+                            </div>
+                            <p class="text-sm text-stone-500 leading-relaxed">
+                                ${product.description}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Botón de acción -->
+                    <div class="p-5 pt-0">
+                        <button 
+                            onclick="addToCart(${product.id})" 
+                            ${isOutOfStock ? 'disabled' : ''}
+                            class="w-full py-3 px-4 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition-all active:scale-95 ${
+                                isOutOfStock 
+                                ? 'bg-stone-100 text-stone-400 cursor-not-allowed' 
+                                : 'bg-amber-500 hover:bg-orange-600 text-white shadow-xs'
+                            }">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>${isOutOfStock ? 'Sin existencias' : 'Agregar al carrito'}</span>
+                        </button>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        /**
+         * Agrega una unidad de un producto al carrito y descuenta del stock disponible
+         */
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product || product.stock <= 0) return;
+
+            // Reducir el stock disponible
+            product.stock -= 1;
+
+            // Buscar si ya está en el carrito
+            const existingItem = cart.find(item => item.productId === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ productId: product.id, quantity: 1 });
+            }
+
+            renderProducts();
+            renderCart();
+            showToast(`Agregaste "${product.name}" al carrito`);
+        }
+
+        /**
+         * Modifica la cantidad de un ítem desde el panel del carrito
+         */
+        function updateCartQuantity(productId, delta) {
+            const cartIndex = cart.findIndex(item => item.productId === productId);
+            const product = products.find(p => p.id === productId);
+            if (cartIndex === -1 || !product) return;
+
+            if (delta > 0) {
+                // Aumentar cantidad si hay stock
+                if (product.stock > 0) {
+                    cart[cartIndex].quantity += 1;
+                    product.stock -= 1;
+                } else {
+                    showToast('No queda más stock disponible de este producto');
+                    return;
+                }
+            } else if (delta < 0) {
+                // Disminuir cantidad y devolver al stock
+                cart[cartIndex].quantity -= 1;
+                product.stock += 1;
+                if (cart[cartIndex].quantity <= 0) {
+                    cart.splice(cartIndex, 1);
+                }
+            }
+
+            renderProducts();
+            renderCart();
+        }
+
+        /**
+         * Vacía el carrito por completo y restaura el stock de todos los productos
+         */
+        function clearCart() {
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.productId);
+                if (product) {
+                    product.stock += item.quantity;
+                }
+            });
+            cart = [];
+            renderProducts();
+            renderCart();
+            showToast('Carrito vaciado');
+        }
+
+        /**
+         * Renderiza el contenido del carrito lateral y actualiza el contador y el total
+         */
+        function renderCart() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cart-badge');
+            const footer = document.getElementById('cart-footer');
+            const totalEl = document.getElementById('cart-total');
+
+            // Calcular total de artículos y monto total
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => {
+                const product = products.find(p => p.id === item.productId);
+                return sum + (product ? product.price * item.quantity : 0);
+            }, 0);
+
+            badge.textContent = totalItems;
+            totalEl.textContent = `$${totalPrice.toFixed(2)}`;
+
+            if (cart.length === 0) {
+                footer.classList.add('hidden');
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-12 px-4">
+                        <div class="w-16 h-16 rounded-full bg-amber-100 text-amber-500 flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-stone-800 font-bold mb-1">Tu carrito está vacío</p>
+                        <p class="text-sm text-stone-500">Explora el catálogo de Sunny y agrega los productos que más te gusten.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            footer.classList.remove('hidden');
+            container.innerHTML = '';
+
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.productId);
+                if (!product) return;
+
+                const subtotal = product.price * item.quantity;
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-amber-50/60 border border-amber-200/70';
+
+                row.innerHTML = `
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-stone-900 text-sm truncate">${product.name}</h4>
+                        <p class="text-xs text-stone-500 mt-0.5">$${product.price} c/u &bull; Subtotal: <span class="font-semibold text-orange-600">$${subtotal}</span></p>
+                    </div>
+
+                    <!-- Controles de cantidad -->
+                    <div class="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-amber-200">
+                        <button onclick="updateCartQuantity(${product.id}, -1)" class="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-amber-100 text-stone-700 font-bold transition-colors" aria-label="Restar">
+                            -
+                        </button>
+                        <span class="text-sm font-bold text-stone-900 w-5 text-center">${item.quantity}</span>
+                        <button onclick="updateCartQuantity(${product.id}, 1)" class="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-amber-100 text-stone-700 font-bold transition-colors" aria-label="Sumar">
+                            +
+                        </button>
+                    </div>
+                `;
+
+                container.appendChild(row);
+            });
+        }
+
+        /**
+         * Abre o cierra el cajón lateral del carrito
+         */
+        function toggleCart(open) {
+            const overlay = document.getElementById('cart-overlay');
+            const drawer = document.getElementById('cart-drawer');
+
+            if (open) {
+                overlay.classList.remove('hidden');
+                // Pequeño retardo para activar la transición CSS de opacidad
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    drawer.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                overlay.classList.add('opacity-0');
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        /**
+         * Procesa la compra actual, copia el resumen al portapapeles, muestra el modal y abre el perfil de Instagram
+         */
+        function checkout() {
+            if (cart.length === 0) return;
+
+            const instagramUrl = 'https://www.instagram.com/cdrzenith?vrfl=MWYzN25jdDlyMmMyOQ==';
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            let totalPrice = 0;
+            let orderLines = ['¡Hola Sunny! Me gustaría confirmar este pedido:'];
+
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.productId);
+                if (product) {
+                    const subtotal = product.price * item.quantity;
+                    totalPrice += subtotal;
+                    orderLines.push(`• ${item.quantity}x ${product.name} ($${subtotal})`);
+                }
+            });
+
+            orderLines.push(`Total a pagar: $${totalPrice.toFixed(2)}`);
+            const orderText = orderLines.join('\n');
+
+            // Copiar el resumen del pedido al portapapeles usando un área de texto temporal
+            try {
+                const textArea = document.createElement('textarea');
+                textArea.value = orderText;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            } catch (err) {
+                console.error('No se pudo copiar el resumen:', err);
+            }
+
+            // Vaciar el carrito sin devolver el stock (porque ya se vendió)
+            cart = [];
+            renderCart();
+            toggleCart(false);
+
+            const summaryText = document.getElementById('order-summary-text');
+            summaryText.textContent = `Has adquirido ${totalItems} ${totalItems === 1 ? 'artículo' : 'artículos'} por un total de $${totalPrice.toFixed(2)}.`;
+
+            const modal = document.getElementById('order-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            // Redirigir automáticamente al perfil de Instagram en una nueva pestaña
+            window.open(instagramUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('order-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        /**
+         * Muestra una notificación temporal en la parte inferior
+         */
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        // Inicializar la tienda al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            renderCart();
+        });
+    </script>
+</body>
+</html>
